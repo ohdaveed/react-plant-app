@@ -1,5 +1,6 @@
 import React from 'react';
 import PlantList from '../PlantList';
+import CreatePlant from '../CreatePlantForm';
 
 class PlantContainer extends React.Component {
 	constructor(props) {
@@ -32,6 +33,7 @@ class PlantContainer extends React.Component {
 			<React.Fragment>
 				<h2>Plants</h2>
 				<PlantList plants={this.state.plants} />
+				<CreatePlant />
 			</React.Fragment>
 		);
 	}
