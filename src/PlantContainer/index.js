@@ -28,7 +28,12 @@ class PlantContainer extends React.Component {
 		}
 	};
 	render() {
-		return <PlantList plants={this.state.plants} />;
+		return (
+			<React.Fragment>
+				<h2>Plants</h2>
+				<PlantList plants={this.state.plants} />
+			</React.Fragment>
+		);
 	}
 }
 

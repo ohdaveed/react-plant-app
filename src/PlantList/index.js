@@ -5,7 +5,7 @@ function PlantList(props) {
   const plants = props.plants.map((plant) => {
     return (
       <Card key={plant.id}>
-        <Image src={plant.image} size="small" />
+        <Image src={plant.image} size="small" wrapped ui={false} />
         <Card.Content>
           <Card.Header>{plant.name}</Card.Header>
           <Card.Description>{plant.scientific_name}</Card.Description>
