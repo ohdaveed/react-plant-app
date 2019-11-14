@@ -1,19 +1,20 @@
 import React from 'react';
+import PlantList from '../PlantList'
 
 class PlantContainer extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			plants = []
+			plants: []
 		};
 	}
 	componentDidMount(){
-		this.getPlants
+		this.getPlants();
 	}
 	getPlants = async () => {
 		try {
-			const plants = await fetch(process.env.REACT_APP_API_URL + '/api/v1/dogs/');
+			const plants = await fetch(process.env.REACT_APP_API_URL + '/api/v1/plants/');
 			const parsedPlants = await plants.json();
 			console.log(parsedPlants);
 
@@ -25,8 +26,10 @@ class PlantContainer extends React.Component {
 		}
 	};
 	render(){
-		return <PlantList />
+		return (
+			<h1>plant data</h1>
+			)
 	}
 }
 
-export default PlantContainer
+export default PlantContainer;
