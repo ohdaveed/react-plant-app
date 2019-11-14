@@ -36,7 +36,7 @@ class PlantContainer extends React.Component {
 
 		try {
 			// We have to send JSON
-			// createdDogResponse variable will store the response from the express API
+			// createdPlantResponse variable will store the response from the express API
 			const createdPlantResponse = await fetch(
 				process.env.REACT_APP_API_URL + '/api/v1/plants/',
 				{
@@ -53,9 +53,9 @@ class PlantContainer extends React.Component {
 			const parsedResponse = await createdPlantResponse.json();
 			console.log(parsedResponse, ' this is response');
 
-			// we are emptying all the dogs that are living in state into a new array,
-			// and then adding the dog we just created to the end of it
-			// the new dog which is called parsedResponse.data
+			// we are emptying all the plants that are living in state into a new array,
+			// and then adding the plant we just created to the end of it
+			// the new plant which is called parsedResponse.data
 
 			this.setState({
 				plants: [...this.state.plants, parsedResponse.data]
@@ -65,13 +65,32 @@ class PlantContainer extends React.Component {
 			console.log(err);
 		}
 		// request address will start with 'http://localhost:9000'
-		// because after we create it, we want to add it to the dogs array
+		// because after we create it, we want to add it to the plants array
+	};
+	deletePlant = async (id) => {
+		console.log(id);
+
+		const deletePlantResponse = await fetch(
+			process.env.REACT_APP_API_URL + '/api/v1/plants/' + id,
+			{ method: 'DELETE' }
+		);
+
+		// This is the parsed response from plant
+		const deletePlantParsed = await deletePlantResponse.json();
+		console.log(deletePlantParsed);
+		// Now that the db has deleted our item, we need to remove it from state
+		this.setState({
+			plants: this.state.plants.filter((plant) => plant.id !== id)
+		});
 	};
 	render() {
 		return (
 			<React.Fragment>
 				<h2>Plants</h2>
-				<PlantList plants={this.state.plants} />
+				<PlantList
+					plants={this.state.plants}
+					deletePlant={this.deletePlant}
+				/>
 				<CreatePlant addPlant={this.addPlant} />
 			</React.Fragment>
 		);
