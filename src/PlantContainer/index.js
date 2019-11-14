@@ -1,0 +1,32 @@
+import React from 'react';
+
+class PlantContainer extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			plants = []
+		};
+	}
+	componentDidMount(){
+		this.getPlants
+	}
+	getPlants = async () => {
+		try {
+			const plants = await fetch(process.env.REACT_APP_API_URL + '/api/v1/dogs/');
+			const parsedPlants = await plants.json();
+			console.log(parsedPlants);
+
+			this.setState({
+				plants: parsedPlants.data
+			});
+		} catch (err) {
+			console.log(err)
+		}
+	};
+	render(){
+		return <PlantList />
+	}
+}
+
+export default PlantContainer
